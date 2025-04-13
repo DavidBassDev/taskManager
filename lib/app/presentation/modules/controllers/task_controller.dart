@@ -3,9 +3,6 @@ import 'package:get/get.dart';
 import 'package:task_manager/app/data/models/models/task_model.dart';
 
 class TaskController extends GetxController {
-  var nombreTarea = ''.obs;
-  var duracionMinutos = 0.0.obs;
-  var prioridad = ''.obs;
   var listaTareas = <TaskModel>[].obs;
   var prioridadSeleccionada = 'Baja'.obs;
   List<String> prioridades = ['Alta', 'Media', 'Baja'];
@@ -22,21 +19,22 @@ class TaskController extends GetxController {
       if (duracion == null) {
         Get.snackbar('Revisa la info!', 'Las horas deben ser numeros.');
       } else {
-        TaskModel tarea = TaskModel(
-            nombreTarea: nombreController.text,
-            duracionMinutos: duracion,
-            prioridad: prioridadController.text);
-        addToList(tarea);
-      } //aca creo el registro
+        TaskModel taskmodel = TaskModel(nombreController.value.text, duracion,
+            prioridadController.value.text);
+        addToList(taskmodel,
+            2); //aca le paso valor para que el usuario vea que si se creo
+      }
     } else {
       Get.snackbar('Revisa la info!', 'Todos los campos deben estar llenos');
     }
   }
 
-  addToList(TaskModel tarea) {
+  addToList(TaskModel tarea, int? time) {
     listaTareas.add(tarea);
-
-    Get.snackbar('Exito!', 'Tarea agregada a la lista');
+    time ??=
+        0; // aca hago esto para saber si viene del metodo crear lista de ejemplo, para que no dure mucho en pantalla
+    Get.snackbar('Exito!', 'Tarea agregada a la lista',
+        duration: Duration(seconds: time));
     nombreController.clear();
     duracionController.clear();
     prioridadController.clear();
@@ -49,53 +47,29 @@ class TaskController extends GetxController {
   }
 
   createExamplesTask() {
-    nombreTarea = "Lavar Ropa".obs;
-    duracionMinutos = 60.0.obs;
-    prioridad = 'Media'.obs;
-    TaskModel tarea = TaskModel(
-        nombreTarea: nombreTarea.string,
-        duracionMinutos: duracionMinutos.value,
-        prioridad: prioridad.string);
-    addToList(tarea);
+    TaskModel taskmodel = TaskModel("Lavar ropa", 120.0, "media");
+
+    addToList(taskmodel, null);
     //2
-    nombreTarea = "Barrer y trapear".obs;
-    duracionMinutos = 40.0.obs;
-    prioridad = 'Media'.obs;
-    TaskModel tarea2 = TaskModel(
-        nombreTarea: nombreTarea.string,
-        duracionMinutos: duracionMinutos.value,
-        prioridad: prioridad.string);
-    addToList(tarea2);
+    TaskModel taskmodel2 = TaskModel("Barrer y trapear", 40.0, "media");
+
+    addToList(taskmodel2, null);
 
     //3
-    nombreTarea = "Cocinar".obs;
-    duracionMinutos = 120.0.obs;
-    prioridad = 'Alta'.obs;
-    TaskModel tarea3 = TaskModel(
-        nombreTarea: nombreTarea.string,
-        duracionMinutos: duracionMinutos.value,
-        prioridad: prioridad.string);
-    addToList(tarea3);
+    TaskModel taskmodel3 = TaskModel("Cocinar", 120, "media");
+
+    addToList(taskmodel3, null);
 
     //4
-    nombreTarea = "Sacar basura".obs;
-    duracionMinutos = 10.0.obs;
-    prioridad = 'baja'.obs;
-    TaskModel tarea4 = TaskModel(
-        nombreTarea: nombreTarea.string,
-        duracionMinutos: duracionMinutos.value,
-        prioridad: prioridad.string);
-    addToList(tarea4);
+    TaskModel taskmodel4 = TaskModel("Sacar basura", 10.0, "baja");
+
+    addToList(taskmodel4, null);
 
     //5
-    nombreTarea = "Realizar talleres universidad".obs;
-    duracionMinutos = 120.0.obs;
-    prioridad = 'Media'.obs;
-    TaskModel tarea5 = TaskModel(
-        nombreTarea: nombreTarea.string,
-        duracionMinutos: duracionMinutos.value,
-        prioridad: prioridad.string);
-    addToList(tarea5);
+    TaskModel taskmodel5 =
+        TaskModel("Realizar talleres universidad", 120.2, "Media");
+
+    addToList(taskmodel5, null);
 
     Get.snackbar('Lista cargada!', 'se han cargado tareas de ejemplo');
   }

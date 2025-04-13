@@ -32,7 +32,7 @@ class HomeUi extends StatelessWidget {
           Center(
             child: Obx(
               () => Text(
-                  "Hola ${userController.nombre} , para iniciar por favor selecciona una de las siguientes opciones",
+                  "Hola ${userController.usermodel.nombre} , para iniciar por favor selecciona una de las siguientes opciones",
                   style: TextStyle(fontSize: 18)),
             ),
           ),

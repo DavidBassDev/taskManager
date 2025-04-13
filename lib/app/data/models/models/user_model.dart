@@ -1,5 +1,5 @@
-class UserModel {
-  String nombre = 'Usuario';
+import 'package:get/get.dart';
 
-  UserModel({required this.nombre});
+class UserModel {
+  var nombre = 'Usuario'.obs;
 }

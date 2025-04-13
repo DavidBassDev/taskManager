@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:task_manager/app/data/models/models/user_model.dart';
 import 'package:task_manager/app/presentation/modules/controllers/user_controller.dart';
 import 'package:task_manager/app/routes/app_routes.dart';
 
@@ -19,7 +20,7 @@ class MyProfile extends StatelessWidget {
           SizedBox(height: 150, child: Image.asset('assets/profile.png')),
           Obx(
             () => Text(
-                "Hola ${userController.nombre}, aqui puedes modificar tu nombre",
+                "Hola ${userController.usermodel.nombre}, aqui puedes modificar tu nombre",
                 style: TextStyle(
                   fontSize: 20,
                   color: Color.fromARGB(255, 255, 69, 69),
@@ -35,7 +36,7 @@ class MyProfile extends StatelessWidget {
                 () => TextField(
                   controller: userController.nombreController,
                   decoration: InputDecoration(
-                    hintText: "${userController.nombre}",
+                    hintText: userController.usermodel.nombre.string,
                     contentPadding: const EdgeInsets.symmetric(
                         horizontal: 16, vertical: 12),
                     border: OutlineInputBorder(

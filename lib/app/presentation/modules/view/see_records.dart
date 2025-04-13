@@ -21,13 +21,13 @@ class SeeRecords extends StatelessWidget {
               itemBuilder: (context, index) {
                 final tarea = controller.listaTareas[index];
                 return ListTile(
-                  title: Text(tarea.nombreTarea),
+                  title: Text(tarea.nombreTarea.string),
                   subtitle: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text('Prioridad',
                           style: TextStyle(fontWeight: FontWeight.bold)),
-                      Text(tarea.prioridad),
+                      Text(tarea.prioridad.string),
                       Text('Duracion tarea',
                           style: TextStyle(fontWeight: FontWeight.bold)),
                       Text(tarea.duracionMinutos.toString())
